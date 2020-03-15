@@ -287,6 +287,7 @@ export default class ModalDropdown extends Component {
                 style={styles.list}
                 dataSource={this._dataSource}
                 renderRow={this._renderRow}
+                renderHeader={this._renderHeader}
                 renderSeparator={renderSeparator || this._renderSeparator}
                 automaticallyAdjustContentInsets={false}
                 showsVerticalScrollIndicator={showsVerticalScrollIndicator}
@@ -294,7 +295,14 @@ export default class ModalDropdown extends Component {
       />
     );
   }
-
+  _renderHeader = () => {
+    const {renderHeader} = this.props;
+    if(!renderHeader) {
+      return <></>
+    }
+    else
+      return renderHeader()
+  }
   get _dataSource() {
     const {options} = this.props;
     const ds = new ListView.DataSource({
